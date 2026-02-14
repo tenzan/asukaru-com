@@ -1,0 +1,27 @@
+---
+import { getLocaleFromUrl, t } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+---
+
+<section class="py-24 sm:py-32">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">
+      {t(locale, "hero.title")}
+    </h1>
+    <p class="mt-2 text-lg text-gray-500">
+      {t(locale, "hero.subtitle")}
+    </p>
+    <p class="mt-6 text-xl text-gray-700 max-w-2xl mx-auto">
+      {t(locale, "hero.tagline")}
+    </p>
+    <div class="mt-10">
+      <a
+        href="#contact"
+        class="inline-block bg-gray-900 text-white px-8 py-3 text-sm font-medium hover:bg-gray-800 transition-colors"
+      >
+        {t(locale, "nav.contact")}
+      </a>
+    </div>
+  </div>
+</section>

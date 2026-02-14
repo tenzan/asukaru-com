@@ -1,0 +1,42 @@
+---
+import { getLocaleFromUrl, t, getLocalePath, getSwitchLocalePath } from "../i18n/utils";
+import { languages } from "../i18n/ui";
+
+const locale = getLocaleFromUrl(Astro.url);
+const switchLocale = locale === "en" ? "ja" : "en";
+const switchPath = getSwitchLocalePath(Astro.url);
+---
+
+<header class="border-b border-gray-200">
+  <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href={getLocalePath(locale, "/")} class="text-lg font-bold tracking-tight">
+      飛鳥瑠
+    </a>
+    <div class="flex items-center gap-6 text-sm">
+      <a
+        href={`${getLocalePath(locale, "/")}#services`}
+        class="text-gray-600 hover:text-gray-900 transition-colors"
+      >
+        {t(locale, "nav.services")}
+      </a>
+      <a
+        href={`${getLocalePath(locale, "/")}#about`}
+        class="text-gray-600 hover:text-gray-900 transition-colors"
+      >
+        {t(locale, "nav.about")}
+      </a>
+      <a
+        href={`${getLocalePath(locale, "/")}#contact`}
+        class="text-gray-600 hover:text-gray-900 transition-colors"
+      >
+        {t(locale, "nav.contact")}
+      </a>
+      <a
+        href={switchPath}
+        class="text-gray-500 hover:text-gray-900 transition-colors border-l border-gray-200 pl-6"
+      >
+        {languages[switchLocale]}
+      </a>
+    </div>
+  </nav>
+</header>

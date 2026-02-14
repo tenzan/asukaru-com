@@ -1,0 +1,30 @@
+---
+import { getLocaleFromUrl, t } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+
+const details = [
+  { label: t(locale, "about.representative"), value: locale === "ja" ? "唐沢 飛鳥瑠" : "Askar Karasawa" },
+  { label: t(locale, "about.established"), value: t(locale, "about.established.date") },
+  { label: t(locale, "about.location"), value: t(locale, "about.location.value") },
+];
+---
+
+<section id="about" class="py-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl font-bold tracking-tight text-center">
+      {t(locale, "about.title")}
+    </h2>
+    <p class="mt-8 text-gray-600 leading-relaxed max-w-3xl mx-auto text-center">
+      {t(locale, "about.description")}
+    </p>
+    <dl class="mt-12 max-w-md mx-auto divide-y divide-gray-200">
+      {details.map((item) => (
+        <div class="py-4 flex justify-between">
+          <dt class="text-gray-500">{item.label}</dt>
+          <dd class="font-medium">{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

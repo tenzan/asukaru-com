@@ -1,0 +1,111 @@
+---
+import { getLocaleFromUrl, t } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+---
+
+<section id="contact" class="py-24 bg-gray-50">
+  <div class="max-w-xl mx-auto px-6">
+    <h2 class="text-3xl font-bold tracking-tight text-center">
+      {t(locale, "contact.title")}
+    </h2>
+    <p class="mt-4 text-gray-600 text-center">
+      {t(locale, "contact.description")}
+    </p>
+    <form id="contact-form" class="mt-12 space-y-6">
+      {/* Honeypot field */}
+      <div class="hidden" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">
+          {t(locale, "contact.name")}
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="mt-1 block w-full border border-gray-300 px-4 py-2.5 text-sm focus:border-gray-900 focus:outline-none transition-colors"
+        />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">
+          {t(locale, "contact.email")}
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="mt-1 block w-full border border-gray-300 px-4 py-2.5 text-sm focus:border-gray-900 focus:outline-none transition-colors"
+        />
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">
+          {t(locale, "contact.message")}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="mt-1 block w-full border border-gray-300 px-4 py-2.5 text-sm focus:border-gray-900 focus:outline-none transition-colors resize-none"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-gray-900 text-white px-8 py-3 text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {t(locale, "contact.submit")}
+      </button>
+      <div id="form-status" class="text-sm text-center hidden"></div>
+    </form>
+  </div>
+</section>
+
+<script
+  define:vars={{
+    successMsg: t(locale, "contact.success"),
+    errorMsg: t(locale, "contact.error"),
+    sendingMsg: t(locale, "contact.sending"),
+    submitMsg: t(locale, "contact.submit"),
+  }}
+>
+  const form = document.getElementById("contact-form");
+  const statusEl = document.getElementById("form-status");
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = sendingMsg;
+    statusEl.classList.add("hidden");
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        statusEl.textContent = successMsg;
+        statusEl.className = "text-sm text-center text-green-700";
+        form.reset();
+      } else {
+        statusEl.textContent = errorMsg;
+        statusEl.className = "text-sm text-center text-red-600";
+      }
+    } catch {
+      statusEl.textContent = errorMsg;
+      statusEl.className = "text-sm text-center text-red-600";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitMsg;
+    }
+  });
+</script>
