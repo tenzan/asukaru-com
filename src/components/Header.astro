@@ -20,6 +20,12 @@ const switchPath = getSwitchLocalePath(Astro.url);
         {t(locale, "nav.services")}
       </a>
       <a
+        href={getLocalePath(locale, "/products")}
+        class="text-gray-600 hover:text-gray-900 transition-colors"
+      >
+        {t(locale, "nav.products")}
+      </a>
+      <a
         href={`${getLocalePath(locale, "/")}#about`}
         class="text-gray-600 hover:text-gray-900 transition-colors"
       >

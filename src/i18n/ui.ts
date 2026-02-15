@@ -16,8 +16,34 @@ export const ui = {
 
     // Nav
     "nav.services": "Services",
+    "nav.products": "Products",
     "nav.about": "About",
     "nav.contact": "Contact",
+
+    // Products
+    "products.title": "Products",
+    "products.subtitle": "SaaS products built and operated by Asukaru.",
+    "products.signizr.name": "Signizr",
+    "products.signizr.tagline": "Digital Signage Made Simple",
+    "products.signizr.description":
+      "Cloud-based multi-screen display management for retail stores, offices, and public spaces. Upload content once and push it to every screen instantly.",
+    "products.signizr.feature1": "Cloud Management",
+    "products.signizr.feature2": "Multi-Display Sync",
+    "products.signizr.feature3": "Instant Updates",
+    "products.signizr.feature4": "Remote Monitoring",
+    "products.signizr.feature5": "ChromeOS Support",
+    "products.signizr.cta": "Visit Signizr",
+    "products.signizr.url": "https://signizr.com",
+    "products.shodaku.name": "Shodaku",
+    "products.shodaku.tagline": "Approvals Made Effortless",
+    "products.shodaku.description":
+      "B2B approval workflow platform that lets decision-makers approve or reject requests with a single click — right from their email inbox.",
+    "products.shodaku.feature1": "One-Click Email Decisions",
+    "products.shodaku.feature2": "Custom Templates",
+    "products.shodaku.feature3": "Multi-Step Workflows",
+    "products.shodaku.feature4": "GDPR / APPI Compliant",
+    "products.shodaku.cta": "Visit Shodaku",
+    "products.shodaku.url": "https://shodaku.com",
 
     // Hero
     "hero.title": "合同会社飛鳥瑠",
@@ -76,8 +102,34 @@ export const ui = {
 
     // Nav
     "nav.services": "サービス",
+    "nav.products": "プロダクト",
     "nav.about": "会社概要",
     "nav.contact": "お問い合わせ",
+
+    // Products
+    "products.title": "プロダクト",
+    "products.subtitle": "飛鳥瑠が開発・運営するSaaSプロダクト。",
+    "products.signizr.name": "Signizr",
+    "products.signizr.tagline": "デジタルサイネージをシンプルに",
+    "products.signizr.description":
+      "小売店舗、オフィス、公共スペース向けのクラウド型マルチスクリーン管理。コンテンツを一度アップロードすれば、すべての画面に即座に配信できます。",
+    "products.signizr.feature1": "クラウド管理",
+    "products.signizr.feature2": "マルチディスプレイ同期",
+    "products.signizr.feature3": "即時更新",
+    "products.signizr.feature4": "リモート監視",
+    "products.signizr.feature5": "ChromeOS対応",
+    "products.signizr.cta": "Signizrを見る",
+    "products.signizr.url": "https://signizr.com",
+    "products.shodaku.name": "Shodaku",
+    "products.shodaku.tagline": "承認をもっと簡単に",
+    "products.shodaku.description":
+      "意思決定者がメールからワンクリックで承認・却下できるB2B承認ワークフロープラットフォーム。",
+    "products.shodaku.feature1": "メールでワンクリック承認",
+    "products.shodaku.feature2": "カスタムテンプレート",
+    "products.shodaku.feature3": "多段階ワークフロー",
+    "products.shodaku.feature4": "GDPR / APPI準拠",
+    "products.shodaku.cta": "Shodakuを見る",
+    "products.shodaku.url": "https://shodaku.com",
 
     // Hero
     "hero.title": "合同会社飛鳥瑠",

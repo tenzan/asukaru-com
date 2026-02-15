@@ -1,0 +1,78 @@
+---
+import { getLocaleFromUrl, t } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+
+const products = [
+  {
+    name: t(locale, "products.signizr.name"),
+    tagline: t(locale, "products.signizr.tagline"),
+    description: t(locale, "products.signizr.description"),
+    features: [
+      t(locale, "products.signizr.feature1"),
+      t(locale, "products.signizr.feature2"),
+      t(locale, "products.signizr.feature3"),
+      t(locale, "products.signizr.feature4"),
+      t(locale, "products.signizr.feature5"),
+    ],
+    cta: t(locale, "products.signizr.cta"),
+    url: t(locale, "products.signizr.url"),
+  },
+  {
+    name: t(locale, "products.shodaku.name"),
+    tagline: t(locale, "products.shodaku.tagline"),
+    description: t(locale, "products.shodaku.description"),
+    features: [
+      t(locale, "products.shodaku.feature1"),
+      t(locale, "products.shodaku.feature2"),
+      t(locale, "products.shodaku.feature3"),
+      t(locale, "products.shodaku.feature4"),
+    ],
+    cta: t(locale, "products.shodaku.cta"),
+    url: t(locale, "products.shodaku.url"),
+  },
+];
+---
+
+<section class="py-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-center">
+      {t(locale, "products.title")}
+    </h1>
+    <p class="mt-4 text-center text-gray-600">
+      {t(locale, "products.subtitle")}
+    </p>
+
+    <div class="mt-16 space-y-12">
+      {products.map((product) => (
+        <div class="border border-gray-200 p-8 sm:p-10">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+            <h2 class="text-2xl font-bold tracking-tight">{product.name}</h2>
+            <span class="text-gray-500 text-sm">{product.tagline}</span>
+          </div>
+
+          <p class="mt-4 text-gray-600 leading-relaxed">{product.description}</p>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            {product.features.map((feature) => (
+              <span class="px-3 py-1 text-xs font-medium border border-gray-200 text-gray-700">
+                {feature}
+              </span>
+            ))}
+          </div>
+
+          <div class="mt-8">
+            <a
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block bg-gray-900 text-white px-6 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors"
+            >
+              {product.cta} &rarr;
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
