@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import { RESEND_API_KEY } from "astro:env/server";
 
 function escapeHtml(str: string): string {
   return str
@@ -10,7 +9,7 @@ function escapeHtml(str: string): string {
     .replace(/"/g, "&quot;");
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const body = await request.json();
     const { name, email, message, website } = body as {
@@ -32,11 +31,22 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const resend = new Resend(RESEND_API_KEY);
+    const runtime = locals.runtime;
+    const apiKey = runtime.env.RESEND_API_KEY;
 
-    await resend.emails.send({
+    if (!apiKey) {
+      console.error("RESEND_API_KEY not configured");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error." }),
+        { status: 500 },
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
+    const { error } = await resend.emails.send({
       from: "Asukaru Contact <onboarding@resend.dev>",
-      to: "contact@asukaru.com",
+      to: "askar.karasaev@gmail.com",
       subject: `Contact form: ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -48,8 +58,17 @@ export const POST: APIRoute = async ({ request }) => {
       replyTo: email,
     });
 
+    if (error) {
+      console.error("Resend error:", error);
+      return new Response(
+        JSON.stringify({ error: "Failed to send message." }),
+        { status: 500 },
+      );
+    }
+
     return new Response(JSON.stringify({ success: true }), { status: 200 });
-  } catch {
+  } catch (err) {
+    console.error("Contact API error:", err);
     return new Response(
       JSON.stringify({ error: "Failed to send message." }),
       { status: 500 },
